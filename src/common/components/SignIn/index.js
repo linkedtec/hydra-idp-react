@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import request from 'superagent'
-import Authenticate from './Authenticate'
-import Consent from './Consent'
-import LocalhostWarning from './LocalhostWarning'
-import ServerWarning from './ServerWarning'
+import Authenticate from './Authenticate2'
+import Consent from './Consent2'
+import LocalhostWarning from './Info'
 
 
 import './styles.css'
@@ -136,8 +135,7 @@ class SignIn extends Component {
                             {...this.props} {...this.state}/>
                     }
                 </div>
-                { typeof window !== 'undefined' && window.location.hostname === 'localhost' ? <LocalhostWarning /> :
-                    <ServerWarning /> }
+                { this.state.authenticated ? null : <Info /> }
             </div>
         )
     }
