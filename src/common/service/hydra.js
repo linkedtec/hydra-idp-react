@@ -38,7 +38,7 @@ const filter = (obj, predicate) => {
 }
 
 const warn = () => {
-    if (process.env.NODE_TLS_REJECT_UNAUTHORIZED) {
+    if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
         console.warn('Skipping TLS Verification because NODE_TLS_REJECT_UNAUTHORIZED is set to 0')
     }
 }

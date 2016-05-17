@@ -4,8 +4,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
-RUN npm install; exit 0
-RUN npm build
+RUN npm install --silent; exit 0
+RUN npm run build
 
 ENTRYPOINT npm start
 

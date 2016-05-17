@@ -51,7 +51,7 @@ module.exports = {
           'react'
         ],
         plugins: [
-          'transform-inline-environment-variables'
+          'transform-dirname-filename'
         ]
       }
     }, {
