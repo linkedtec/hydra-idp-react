@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import request from 'superagent'
-import Authenticate from './Authenticate2'
-import Consent from './Consent2'
+import Authenticate from './Authenticate'
+import Consent from './Consent'
 import LocalhostWarning from './Info'
 
 
