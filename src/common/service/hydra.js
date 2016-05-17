@@ -3,13 +3,17 @@ import jwt from 'jsonwebtoken';
 import OAuth2 from 'simple-oauth2'
 import request from 'superagent'
 import jwkToPem from 'jwk-to-pem'
-import yaml from 'js-yaml';
-import fs   from 'fs';
+import yaml from 'js-yaml'
+import fs from 'fs'
+import fileExists from 'file-exists'
 
 require('superagent-auth-bearer')(request)
 
 const configFromFile = () => {
     const home = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME']
+    if (!fileExists(`${home}/.hydra.yml`)) {
+        return
+    }
     const config = yaml.safeLoad(fs.readFileSync(`${home}/.hydra.yml`, 'utf8'));
     return {
         clientID: config.client_id,

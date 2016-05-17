@@ -8,4 +8,4 @@ RUN npm install; exit 0
 RUN npm build
 
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "dev" ]

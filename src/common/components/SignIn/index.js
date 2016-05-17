@@ -2,8 +2,7 @@ import React, {Component} from 'react'
 import request from 'superagent'
 import Authenticate from './Authenticate'
 import Consent from './Consent'
-import LocalhostWarning from './Info'
-
+import Info from './Info'
 
 import './styles.css'
 

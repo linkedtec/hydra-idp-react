@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default () => (
+const Info = () => (
     <div className="panel panel-info">
         <div className="panel-heading">
             This exemplary app's code is
@@ -33,3 +33,5 @@ export default () => (
         </div>
     </div>
 )
+
+export default Info

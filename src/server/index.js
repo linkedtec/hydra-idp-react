@@ -17,6 +17,8 @@ const port = process.env.PORT || 3000
 const app = express()
 const root = path.join(__dirname, '../../public')
 
+console.log('Public path:', root)
+
 if (!isProduction()) {
   const webpack = require('webpack')
   const webpackConfig = require('webpack.config.client')
