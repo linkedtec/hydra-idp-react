@@ -3,7 +3,7 @@ module.exports = {
     client
       .url(client.launch_url)
       .waitForElementVisible('body', 1000)
-      .assert.title('Hydra')
+      .assert.title('Hydra Identity Provider Example')
       .end()
   }
 }

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import App from 'src/common/components/App'
+import SignIn from 'src/common/components/SignIn'
+import Layout from 'src/common/components/Layout'
 
 export default (
-  <Route path="/" component={App} />
+    <Route components={Layout}>
+        <Route path="/" component={SignIn} />
+    </Route>
 )

@@ -20,7 +20,9 @@ module.exports = {
   devtool: 'source-map',
   target: 'node',
   externals: [
-    nodeExternals()
+    nodeExternals({
+      whitelist: ['bootstrap', 'bootstrap/dist/css/bootstrap.css']
+    })
   ],
   plugins: createEnvAwareArray([
     new webpack.BannerPlugin({

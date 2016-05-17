@@ -1,3 +1,4 @@
+/* global process */
 import consolidate from 'consolidate'
 import express from 'express'
 import path from 'path'
@@ -9,10 +10,11 @@ import { match, RouterContext } from 'react-router'
 import { isProduction } from 'src/common/pkg/env'
 import routes from 'src/common/routes'
 import configureStore from 'src/common/store'
+import handlers from 'src/server/handler'
+import bodyParser from 'body-parser'
 
 const port = process.env.PORT || 3000
 const app = express()
-
 const root = path.join(__dirname, '../../public')
 
 if (!isProduction()) {
@@ -29,7 +31,11 @@ if (!isProduction()) {
   app.use(require('webpack-hot-middleware')(compiler))
 }
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(express.static(root))
+handlers.bindAll(app)
 
 app.use((req, res) => {
   const initialState = {}

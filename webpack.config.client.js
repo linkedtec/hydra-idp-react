@@ -10,8 +10,6 @@ const createEnvAwareArray = R.reject(R.isNil)
 const ifProduction = (x) => isProduction ? x : null
 const ifDevelopment = (x) => isDevelopment ? x : null
 
-console.log(__dirname)
-
 module.exports = {
   name: 'client-side code',
   entry: createEnvAwareArray([
