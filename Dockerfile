@@ -7,5 +7,6 @@ COPY . /usr/src/app
 RUN npm install; exit 0
 RUN npm build
 
+ENTRYPOINT npm start
+
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]

@@ -14,7 +14,7 @@ const configFromFile = () => {
     if (!fileExists(`${home}/.hydra.yml`)) {
         return
     }
-    const config = yaml.safeLoad(fs.readFileSync(`${home}/.hydra.yml`, 'utf8'));
+    const config = yaml.safeLoad(fs.readFileSync(`${home}/.hydra.yml`, 'utf8')) || {};
     return {
         clientID: config.client_id,
         clientSecret: config.client_secret,
