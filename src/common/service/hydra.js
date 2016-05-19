@@ -87,7 +87,7 @@ class Hydra {
                         }
                         return reject({error: 'Could not retrieve validation key: ' + err})
                     }
-                    return resolve(resp.body)
+                    return resolve(resp.body[0])
                 })
             }).catch(reject)
         })
