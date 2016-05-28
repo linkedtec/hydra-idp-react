@@ -45,26 +45,8 @@ const warn = () => {
 
 class Hydra {
     constructor(config) {
-        const defaultConfig = configFromFile()
-        const options = Object.assign({}, defaultConfig, filter(config, (c) => !Boolean(c)))
-
-        this.oauth2 = OAuth2({
-            ...options,
-            site: options.endpoint
-        })
-        this.scope = options.scope || 'core hydra.keys.get'
-        this.endpoint = options.endpoint
-        this.overrideConfig = config
-
+        this.config = config
         this.token = null
-    }
-
-    reload() {
-        const options = Object.assign({}, configFromFile(), filter(this.overrideConfig, (c) => !Boolean(c)))
-        this.oauth2 = OAuth2({
-            ...options,
-            site: options.endpoint
-        })
     }
 
     authenticate() {
@@ -74,7 +56,14 @@ class Hydra {
                 return resolve(this.token)
             }
 
-            this.reload()
+            const fileConfig = configFromFile()
+            const options = Object.assign({}, fileConfig, filter(this.config, (c) => !Boolean(c)))
+            this.oauth2 = OAuth2({
+                ...options,
+                site: options.endpoint
+            })
+            this.endpoint = options.endpoint
+            this.scope = options.scope || 'core hydra.keys.get'
             this.oauth2.client.getToken({scope: this.scope}, (error, result) => {
                 if (error) {
                     return reject({error: 'Could not retrieve access token: ' + error})
@@ -97,7 +86,7 @@ class Hydra {
                         }
                         return reject({error: 'Could not retrieve validation key: ' + err})
                     }
-                    return resolve(resp.body[0])
+                    return resolve(resp.body.keys[0])
                 })
             }).catch(reject)
         })
