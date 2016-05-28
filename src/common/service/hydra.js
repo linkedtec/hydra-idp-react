@@ -54,8 +54,17 @@ class Hydra {
         })
         this.scope = options.scope || 'core hydra.keys.get'
         this.endpoint = options.endpoint
+        this.overrideConfig = config
 
         this.token = null
+    }
+
+    reload() {
+        const options = Object.assign({}, configFromFile(), filter(this.overrideConfig, (c) => !Boolean(c)))
+        this.oauth2 = OAuth2({
+            ...options,
+            site: options.endpoint
+        })
     }
 
     authenticate() {
@@ -65,6 +74,7 @@ class Hydra {
                 return resolve(this.token)
             }
 
+            this.reload()
             this.oauth2.client.getToken({scope: this.scope}, (error, result) => {
                 if (error) {
                     return reject({error: 'Could not retrieve access token: ' + error})
