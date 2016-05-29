@@ -106,15 +106,16 @@ class Hydra {
         })
     }
 
-    generateConsentToken(subject, challenge) {
+    generateConsentToken(subject, scopes, challenge) {
         warn()
         return new Promise((resolve, reject) => {
             this.getKey('consent.endpoint', 'private').then((key) => {
-                const {signature, payload}  = jwt.decode(challenge, {complete: true})
+                const {payload: {aud, exp}}  = jwt.decode(challenge, {complete: true})
                 jwt.sign({
-                    ...payload,
-                    sub: subject,
-                    sig: signature
+                    aud,
+                    exp,
+                    scp: scopes,
+                    sub: subject
                 }, jwkToPem({
                     ...key,
                     // the following keys are optional in the spec but for some reason required by the library.

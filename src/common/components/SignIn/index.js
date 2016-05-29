@@ -55,6 +55,8 @@ class SignIn extends Component {
         this.setState({error: '', processing: true})
         request.post('/api/consent').send({
             challenge: this.state.challenge,
+            // assume that all scopes have been granted
+            scopes: this.state.decodedChallenge.scp,
             email: this.state.email
         }).end(this.handleResponse(({consent}) => {
             window.location.href = this.state.decodedChallenge.redir + '&consent=' + consent

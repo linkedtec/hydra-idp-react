@@ -33,8 +33,8 @@ export default (app) => {
     })
 
     app.post('/api/consent', (r, w) => {
-        const {challenge, email} = r.body
-        hydra.generateConsentToken(email, challenge).then(({consent}) => {
+        const {challenge, scopes, email} = r.body
+        hydra.generateConsentToken(email, scopes, challenge).then(({consent}) => {
             w.send({consent})
         }).catch((error) => {
             console.log('An error occurred on consent', error)
